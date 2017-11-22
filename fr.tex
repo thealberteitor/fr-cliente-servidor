@@ -1,0 +1,113 @@
+\input{preambuloSimple.tex}  % Configuración del documento
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO Y DATOS DE LOS ALUMNOS
+%----------------------------------------------------------------------------------------
+
+\title{	
+	\normalfont \normalsize 
+	\textsc{\textbf{Fundamentos de Redes (2017-2018)} \\ Doble Grado en Ingeniería Informática y Matemáticas \\ Universidad de Granada} \\ [25pt] 
+	\horrule{0.5pt} \\[0.4cm]
+	\huge Definición e implementación de un \\ protocolo de aplicación \\ 
+	\horrule{2pt} \\[0.5cm] 
+}
+
+\author{Simón López Vico \\ Ana María Peña Arnedo \\ Alberto Jesús Durán López} 
+\date{\normalsize\today}
+
+%----------------------------------------------------------------------------------------
+% DOCUMENTOg
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	\maketitle       % título
+	\newpage 
+	\tableofcontents % índice
+	\newpage
+	
+	
+
+	
+	
+\section{Introducción}
+	
+	
+Esta práctica consiste en la implementación de un protocolo de aplicación que consta
+de un servidor y dos clientes. El juego se basa en el famoso "Pilla-Pilla"   donde 
+un jugador 'X' tendrá que alcanzar a otro 'Y'. Para ello, ambos se conectarán con un nombre de usuario correcto almacenado en el servidor. Por tanto, los movimientos que ambos hagan se enviarán a través del servidor hacia el otro cliente.
+		
+	
+	
+	
+\section{Diagrama de estados del servidor}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.8\textwidth]{img/1}
+	\caption{Diagrama de estados del servidor}
+\end{figure}
+	
+
+Empezamos en el estado \textit{START}. El cliente abre la conexión hacia el servidor. Por tanto, pasará al estado \textit{IDENTIFICADO} si introduce un usuario correcto ó se quedará en el estado \textit{NO IDENTIFICADO} hasta que se autentifique correctamente. Una vez conectados ambos clientes, podrán realizar movimientos y pasar al estado \textit{DIFUNDIR MOVIMIENTO} un número indefinido de veces o pasar al estado \textit{END} si el juego se ha acabado. Cabe destacar que cada estado posee su propia comprobación de errores.
+	
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+
+\section{Tabla de estados del servidor}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.8\textwidth]{img/3}
+	\caption{Mensajes que intervienen en el servidor}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Tabla de estados del cliente}	
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.8\textwidth]{img/2}
+	\caption{Mensajes que intervienen en el cliente}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
