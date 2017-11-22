@@ -34,9 +34,10 @@
 	
 Esta práctica consiste en la implementación de un protocolo de aplicación que consta
 de un servidor y dos clientes. El juego se basa en el famoso "Pilla-Pilla"   donde 
-un jugador 'X' tendrá que alcanzar a otro 'Y'. Para ello, ambos se conectarán con un nombre de usuario correcto almacenado en el servidor. Por tanto, los movimientos que ambos hagan se enviarán a través del servidor hacia el otro cliente.
+un jugador 'X' tendrá que alcanzar a otro 'Y'. Para ello, ambos se conectarán con un nombre de usuario correcto almacenado en el servidor. Por tanto, los movimientos que ambos hagan se enviarán a través del servidor hacia el otro cliente. \\
 		
-	
+Para esta aplicación usamos \textit{sockets TCP} ya que nos ofrecen un servicio de transmisión orientado a conexión en el que se garantiza que los datos llegan en el orden en el que fueron enviados, sin errores ni repetición, de manera que nos proporciona control de flujo extremo a extremo y control de errores de forma transparente
+
 	
 	
 \section{Diagrama de estados del servidor}
@@ -50,8 +51,7 @@ un jugador 'X' tendrá que alcanzar a otro 'Y'. Para ello, ambos se conectarán 
 
 Empezamos en el estado \textit{START}. El cliente abre la conexión hacia el servidor. Por tanto, pasará al estado \textit{IDENTIFICADO} si introduce un usuario correcto ó se quedará en el estado \textit{NO IDENTIFICADO} hasta que se autentifique correctamente. Una vez conectados ambos clientes, podrán realizar movimientos y pasar al estado \textit{DIFUNDIR MOVIMIENTO} un número indefinido de veces o pasar al estado \textit{END} si el juego se ha acabado. Cabe destacar que cada estado posee su propia comprobación de errores. \\
 
-Para esta aplicación usamos \textit{sockets TCP} ya que nos ofrecen un servicio de transmisión orientado a conexión en el que se garantiza que los datos llegan en el orden en el que fueron enviados, sin errores ni repetición, de manera que nos proporciona control de flujo extremo a extremo y control de errores de forma transparente
-	
+
 
 
 
@@ -162,6 +162,10 @@ Finalmente, al salir del bucle se imprimirá por pantalla \textit{FIN DEL JUEGO}
 
 \section{Observaciones}
 
+Incluimos este apartado para comentar más en profundidad algunos problemas concretos que nos han surgido:
 
+Para mover al jugador desde el cliente hemos usado la clase ‘scanner’ y el método \\ ‘nextline()’ para así poder recibir un carácter desde teclado. Al usar esta función, nos surge un problema dado que el programa quedará pausado hasta que el usuario introduzca una tecla y pulse la tecla de retorno. Por tanto, no habrá una sincronización tan exacta como quisiéramos entre la posición del contrincante real y la que aparece por pantalla del jugador en cuestión, ya que si pasa mucho tiempo sin efectuar un movimiento, el adversario puede haberse movido a otra posición mientras que el cliente de este jugador aún no se ha actualizado (dado que el programa sigue pausado por la función ‘nextline()’). \\
+
+Para comprobar que hay una sincronización exacta, hemos realizado el método ‘dibuja()’ en el servidor, que imprimirá las posiciones de cada uno de los jugadores cada vez que realizan un movimiento. Dicho método está comentado para no saturar la información que imprime el servidor, pero puede descomentarse para comprobar que la sincronización es exacta entre los clientes.
 
 \end{document}
